@@ -5,7 +5,8 @@
   "description": "Generate social images at runtime",
   "main": ".eleventy.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Resocio/eleventy-plugin-social-image/issues"
   },
-  "homepage": "https://github.com/Resocio/eleventy-plugin-social-image#readme"
+  "homepage": "https://github.com/Resocio/eleventy-plugin-social-image#readme",
+  "devDependencies": {
+    "release-it": "^14.11.6"
+  }
 }
