@@ -1,0 +1,24 @@
+{
+  "name": "@resoc/eleventy-plugin-social-image",
+  "version": "0.0.1",
+  "description": "Generate social images at runtime",
+  "main": ".eleventy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Resocio/eleventy-plugin-social-image.git"
+  },
+  "keywords": [
+    "resoc",
+    "eleventy",
+    "social"
+  ],
+  "author": "Philippe Bernard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Resocio/eleventy-plugin-social-image/issues"
+  },
+  "homepage": "https://github.com/Resocio/eleventy-plugin-social-image#readme"
+}
