@@ -1,16 +1,7 @@
 const fs = require('fs').promises;
+const { fileExists } = require('./utils');
 
 const GITIGNORE = '.gitignore';
-
-const fileExists = async (path) => {
-  try {
-    await fs.access(path);
-    return true;
-  }
-  catch (e) {
-    return false;
-  }
-};
 
 const fileAlreadyIgnored = async (filePath) => {
   const content = await fs.readFile(GITIGNORE);

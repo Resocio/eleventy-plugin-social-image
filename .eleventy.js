@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
-const git = require('./src/gitignore');
+const { handleGitIgnore } = require('./src/gitignore');
+const { handleNetlifyToml } = require('./src/netlify');
 
 module.exports = function(config, options) {
   options = Object.assign({
@@ -10,8 +11,8 @@ module.exports = function(config, options) {
 
   const imgData = {};
 
-  config.on('beforeBuild', () => {
-    git.handleGitIgnore(options.slugToImageDataMappingFile);
+  config.on('beforeBuild', async () => {
+    handleGitIgnore(options.slugToImageDataMappingFile);
   });
 
   config.addShortcode('resoc', ({ ...options } ) => {
@@ -23,6 +24,10 @@ module.exports = function(config, options) {
   });
 
   config.on('afterBuild', async () => {
+    if (!await handleNetlifyToml(options)) {
+      throw 'Please fix your Netlify configuration';
+    }
+
     await fs.writeFile(
       options.slugToImageDataMappingFile,
       JSON.stringify(imgData)

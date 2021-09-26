@@ -25,5 +25,8 @@
   "homepage": "https://github.com/Resocio/eleventy-plugin-social-image#readme",
   "devDependencies": {
     "release-it": "^14.11.6"
+  },
+  "dependencies": {
+    "toml": "^3.0.0"
   }
 }
