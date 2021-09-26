@@ -1,4 +1,5 @@
 const fs = require('fs').promises;
+const git = require('./src/gitignore');
 
 module.exports = function(config, options) {
   options = Object.assign({
@@ -8,6 +9,10 @@ module.exports = function(config, options) {
   }, options);
 
   const imgData = {};
+
+  config.on('beforeBuild', () => {
+    git.handleGitIgnore(options.slugToImageDataMappingFile);
+  });
 
   config.addShortcode('resoc', ({ ...options } ) => {
     imgData[options.slug] = {
