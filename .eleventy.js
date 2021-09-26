@@ -1,20 +1,26 @@
 const fs = require('fs').promises;
 
-module.exports = function(config) {
-  const data = {};
+module.exports = function(config, options) {
+  options = Object.assign({
+    slugToImageDataMappingFile: 'resoc-image-data.json',
+    openGraphBasePath: '/social-images',
+    templatesDir: 'resoc-templates'
+  }, options);
+
+  const imgData = {};
 
   config.addShortcode('resoc', ({ ...options } ) => {
-    data[options.slug] = {
+    imgData[options.slug] = {
       template: options.template,
       values: options.values
     };
-    return `/social-images/${options.slug}.jpg`;
+    return `${options.openGraphBasePath}/${options.slug}.jpg`;
   });
 
   config.on('afterBuild', async () => {
     await fs.writeFile(
-      'resoc-image-data.json',
-      JSON.stringify(data)
+      options.slugToImageDataMappingFile,
+      JSON.stringify(imgData)
     );
   });
 }
