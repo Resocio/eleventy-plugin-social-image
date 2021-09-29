@@ -3,17 +3,17 @@ const { handleGitIgnore } = require('./src/gitignore');
 const { handleNetlifyToml } = require('./src/netlify');
 const { handlePackageJson } = require('./src/package');
 
-module.exports = function(config, options) {
-  options = Object.assign({
+module.exports = function(config, pluginOptions) {
+  pluginOptions = Object.assign({
     slugToImageDataMappingFile: 'resoc-image-data.json',
     openGraphBasePath: '/social-images',
     templatesDir: 'resoc-templates'
-  }, options);
+  }, pluginOptions);
 
   const imgData = {};
 
   config.on('beforeBuild', async () => {
-    handleGitIgnore(options.slugToImageDataMappingFile);
+    handleGitIgnore(pluginOptions.slugToImageDataMappingFile);
   });
 
   config.addShortcode('resoc', ({ ...options } ) => {
@@ -21,11 +21,11 @@ module.exports = function(config, options) {
       template: options.template,
       values: options.values
     };
-    return `${options.openGraphBasePath}/${options.slug}.jpg`;
+    return `${pluginOptions.openGraphBasePath}/${options.slug}.jpg`;
   });
 
   config.on('afterBuild', async () => {
-    if (!await handleNetlifyToml(options)) {
+    if (!await handleNetlifyToml(pluginOptions)) {
       throw 'Please fix your Netlify configuration';
     }
     if (!await handlePackageJson()) {
@@ -33,7 +33,7 @@ module.exports = function(config, options) {
     }
 
     await fs.writeFile(
-      options.slugToImageDataMappingFile,
+      pluginOptions.slugToImageDataMappingFile,
       JSON.stringify(imgData)
     );
   });
