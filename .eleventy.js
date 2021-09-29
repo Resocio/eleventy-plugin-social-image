@@ -7,7 +7,8 @@ module.exports = function(config, pluginOptions) {
   pluginOptions = Object.assign({
     slugToImageDataMappingFile: 'resoc-image-data.json',
     openGraphBasePath: '/social-images',
-    templatesDir: 'resoc-templates'
+    templatesDir: 'resoc-templates',
+    patchNetlifyToml: false
   }, pluginOptions);
 
   const imgData = {};
