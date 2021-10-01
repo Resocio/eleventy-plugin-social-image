@@ -74,7 +74,7 @@ const handleNetlifyToml = async (options) => {
 
     if (!netlifyToml['plugins']) {
       console.log(`Append plugin configuration to ${NETLIFY_TOML}`);
-      await fs.appendFile(NETLIFY_TOML, netlifyTomlContentStr(options));
+      await fs.appendFile(NETLIFY_TOML, `\n\n${netlifyTomlContentStr(options)}`);
       return true;
     } else {
       const plugin = netlifyToml['plugins'].find(p => p['package'] === NETLIFY_PACKAGE);
