@@ -50,12 +50,20 @@ module.exports = function(eleventyConfig) {
     openGraphBasePath: '/social-images',
 
     // A file which maps pages to templates and parameters
-    slugToImageDataMappingFile: 'resoc-image-data.json'
+    slugToImageDataMappingFile: 'resoc-image-data.json',
+
+    // Ask the plugin to configure netlify.toml accordingly
+    patchNetlifyToml: true
   });
 };
 ```
 
-In `netlify.toml`, declare the Netlify build plugin:
+The plugin always makes sure the Netlify plugin is correctly configured in `netlify.toml`. When is it not:
+
+- `patchNetlifyToml` set to `false` (default): the plugin fails and explains what to do to fix the error.
+- `patchNetlifyToml` set to `true`: the plugin updates `netlify.toml`. When it happens, comments and formatting are lost. If your file is simple, this might be perfectly fine. If your file is complex and with comments, you don't want the plugin to touch it.
+
+If you don't use `patchNetlifyToml`, in `netlify.toml`, declare the Netlify build plugin:
 
 ```toml
 [[plugins]]
