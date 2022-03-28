@@ -16,6 +16,7 @@
   "keywords": [
     "resoc",
     "eleventy",
+    "eleventy-plugin",
     "social"
   ],
   "author": "Philippe Bernard",
